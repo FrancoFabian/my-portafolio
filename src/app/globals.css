@@ -1,26 +1,211 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-black: #000;
+  --color-black-100: #000319;
+  --color-black-200: rgba(17, 25, 40, 0.75);
+  --color-black-300: rgba(255, 255, 255, 0.125);
+
+  --color-white: #FFF;
+  --color-white-100: #BEC1DD;
+  --color-white-200: #C1C2D3;
+
+  --color-blue-100: #e4ecff;
+  --color-purple: #cbacf9;
+
+  /* === Mapeo de tus “semantic tokens” (shadcn style) ===
+     Para poder usar bg-primary, text-secondary, etc.
+     (leen de tus variables HSL definidas más abajo) */
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  /* === Border Radius (equivalente a extend.borderRadius) === */
+  --radius: 0.5rem;
+  /* token base para que lo uses en otros cálculos */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+
+  /* === Breakpoints: para .container y media queries === */
+  --breakpoint-2xl: 1400px;
+
+  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+
+    /* token base ya mapeado arriba en @theme */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+
+  * {
+    @apply border-border !scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  button {
+    @apply active:outline-none;
   }
 }
+@keyframes accordion-down {
+  from { height: 0 }
+  to   { height: var(--radix-accordion-content-height) }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height) }
+  to   { height: 0 }
+}
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
+  }
+}
+@keyframes shimmer {
+  from { background-position: 0 0 }
+  to   { background-position: -200% 0 }
+}
+@keyframes moveHorizontal {
+  0%   { transform: translateX(-50%) translateY(-10%) }
+  50%  { transform: translateX(50%)  translateY(10%) }
+  100% { transform: translateX(-50%) translateY(-10%) }
+}
+@keyframes moveInCircle {
+  0%   { transform: rotate(0deg) }
+  50%  { transform: rotate(180deg) }
+  100% { transform: rotate(360deg) }
+}
+@keyframes moveVertical {
+  0%   { transform: translateY(-50%) }
+  50%  { transform: translateY(50%) }
+  100% { transform: translateY(-50%) }
+}
+@keyframes scroll {
+  to { transform: translate(calc(-50% - .5rem)) }
+}
+
+/* Clases “animate-*” (reemplazan theme.extend.animation) */
+@utility animate-accordion-down { animation: accordion-down .2s ease-out }
+@utility animate-accordion-up   { animation: accordion-up   .2s ease-out }
+@utility animate-spotlight      { animation: spotlight 2s ease .75s 1 forwards }
+@utility animate-shimmer        { animation: shimmer 2s linear infinite }
+@utility animate-first          { animation: moveVertical 30s ease infinite }
+@utility animate-second         { animation: moveInCircle 20s reverse infinite }
+@utility animate-third          { animation: moveInCircle 40s linear infinite }
+@utility animate-fourth         { animation: moveHorizontal 40s ease infinite }
+@utility animate-fifth          { animation: moveInCircle 20s ease infinite }
+@utility animate-scroll         { animation: scroll var(--animation-duration,40s) var(--animation-direction,forwards) linear infinite }
+
+/* =============================
+   BACKGROUND SVG UTILITIES
+   - Reemplazan tu plugin matchUtilities con mini-svg-data-uri
+   - Usan currentColor: pinta con text-* (p.ej. text-black/50)
+   ============================= */
+@utility bg-grid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='100' height='100' fill='none' stroke='currentColor'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
+}
+@utility bg-grid-small {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='8' height='8' fill='none' stroke='currentColor'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
+}
+@utility bg-dot {
+  background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' fill='currentColor'%3E%3Ccircle cx='10' cy='10' r='1.6257413'/%3E%3C/svg%3E\");
+}
+/* Tip: controla color/opacidad con text-*, ej:
+   class="bg-grid text-black/20"  */
+
+/* =============================
+   UTILIDADES ADICIONALES
+   ============================= */
+@layer utilities {
+  .heading { @apply font-bold text-4xl md:text-5xl text-center; }
 }
