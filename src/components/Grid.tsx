@@ -8,7 +8,7 @@ export const Grid = () => {
     <section id="about">
       <BentoGrid>
         {gridItems.map
-          ((item, i) => (
+          ((item) => (
             <BentoGridItem
               key={item.id}
               id={item.id}

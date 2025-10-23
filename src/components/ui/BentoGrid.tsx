@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
-
+import Image from "next/image";
 // Also install this npm i --save-dev @types/react-lottie
 import Lottie from "lottie-react";
 
@@ -61,7 +61,7 @@ export const BentoGridItem = ({
     const text = "francofabianm2@gmail.com";
     navigator.clipboard.writeText(text);
     setCopied(true);
-    
+
     // Reset después de 3 segundos para permitir usar la animación nuevamente
     setTimeout(() => {
       setCopied(false);
@@ -87,23 +87,31 @@ export const BentoGridItem = ({
       <div className={`${id === 6 && "flex justify-center"} h-full`}>
         <div className="w-full h-full absolute">
           {img && (
-            <img
-              src={img}
-              alt={img}
-              className={cn(imgClassName, "object-cover object-center ")}
-            />
+            <div className="relative w-full h-full">
+              <Image
+                src={img}
+                alt="" // decorativa
+                fill
+                className={cn("object-cover object-center", imgClassName)}
+                sizes="(min-width:1024px) 600px, 100vw"
+                priority={id === 1}
+              />
+            </div>
           )}
         </div>
         <div
-          className={`absolute right-0 -bottom-5 ${id === 5 && "w-full opacity-80"
-            } `}
+          className={`absolute right-0 -bottom-5 ${
+            id === 5 ? "w-full opacity-80" : "w-32 md:w-40 lg:w-48"
+          }`}
         >
           {spareImg && (
-            <img
+            <Image
               src={spareImg}
-              alt={spareImg}
-              //   width={220}
-              className="object-cover object-center w-full h-full"
+              alt="" // decorativa
+              width={300}
+              height={300}
+              className="object-cover object-center w-full h-auto"
+              sizes="(min-width:1024px) 600px, 100vw"
             />
           )}
         </div>
