@@ -186,6 +186,11 @@
 @utility animate-fifth          { animation: moveInCircle 20s ease infinite }
 @utility animate-scroll         { animation: scroll var(--animation-duration,40s) var(--animation-direction,forwards) linear infinite }
 
+/* Anchor navigation offset to account for fixed FloatingNav */
+html {
+  scroll-padding-top: 6.5rem; /* compensa altura y offset del nav fijo */
+}
+
 /* =============================
    BACKGROUND SVG UTILITIES
    - Reemplazan tu plugin matchUtilities con mini-svg-data-uri
@@ -208,4 +213,10 @@
    ============================= */
 @layer utilities {
   .heading { @apply font-bold text-4xl md:text-5xl text-center; }
+}
+.bk-gradient-found{
+  background: rgb(100, 20, 55);
+}
+.bk-gradient-found2{
+  background: rgb(1, 0, 14);
 }

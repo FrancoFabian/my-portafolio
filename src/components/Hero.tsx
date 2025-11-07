@@ -5,7 +5,7 @@ import { FaLocationArrow } from "react-icons/fa";
 
 const Hero = () => {
     return (
-        <div className="pb-20 pt-36" id="hero">
+        <section className="pb-20 pt-36 scroll-mt-32 h-screen" id="hero">
       {/**
        *  UI: Spotlights
        *  Link: https://ui.aceternity.com/components/spotlight
@@ -56,7 +56,7 @@ const Hero = () => {
           />
 
           <p className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2xl">
-            Hi! I&apos;m Franco, a Next.js Developer based in Oaxaca.
+            Hi! I&apos;m Franco, a Full Stack Developer based in Oaxaca.
           </p>
 
           <a href="#about">
@@ -68,7 +68,7 @@ const Hero = () => {
           </a>
         </div>
       </div>
-    </div>
+    </section>
     );
 };
 export default Hero;
