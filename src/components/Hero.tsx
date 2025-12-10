@@ -3,9 +3,11 @@ import { TextGenerateEffect } from "./ui/TextGenerateEffect";
 import { MagicButton } from "./ui/MagicButton";
 import { FaLocationArrow } from "react-icons/fa";
 
+import ProfileCard from "./profile/ProfileCard";
+
 const Hero = () => {
-    return (
-        <section className="pb-20 pt-36 scroll-mt-32 h-screen" id="hero">
+  return (
+    <section className="pb-20 pt-26 scroll-mt-32 h-screen" id="hero">
       {/**
        *  UI: Spotlights
        *  Link: https://ui.aceternity.com/components/spotlight
@@ -39,7 +41,23 @@ const Hero = () => {
         />
       </div>
 
-      <div className="flex justify-center relative my-20 z-10">
+      <div className="w-full h-full flex">
+        <div className="w-1/2  h-screen">
+          <ProfileCard
+            name=""
+            title=""
+            avatarUrl="/avatar2.webp"
+            iconUrl="/iconpattern.png"
+            grainUrl="/grain.webp"
+            showUserInfo={false}
+            cardMaxHeight="100vh"
+            cardWidth="480px"
+            cardHeight="650px"
+          
+
+          />
+        </div>
+        <div className="flex justify-center relative my-20 z-10">
         <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
           <p className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
             Dynamic Web Magic with Next.js
@@ -68,7 +86,9 @@ const Hero = () => {
           </a>
         </div>
       </div>
+      </div>
+      
     </section>
-    );
+  );
 };
 export default Hero;
